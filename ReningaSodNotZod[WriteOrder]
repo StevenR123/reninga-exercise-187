@@ -1,0 +1,58 @@
+//AUTHOR: [Steven Reninga]
+//Course: CPT 187
+//PURPOSE: [Used to keep track of the specific names, quantities, prices, and other important information of items being purchased.]
+//STARTDATE: [12/1/2020]
+package edu.cpt187.reninga.exercise6;
+
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WriteOrder
+{
+	//Declare Class Variables
+	private boolean fileFoundFlag = false;
+	private String masterFileName = "";
+	private int recordCount = 0;
+	
+	//WriteOrder Class Constructor
+	public WriteOrder(String borrowedFileName)
+	{
+		masterFileName = borrowedFileName;
+	}//END of WriteOrder Class Constructor
+	
+	//set Write Order
+	public void setWriteOrder(int borrowedItemID, String borrowedItemName, double borrowedItemPrice, int borrowedQuantity, double borrowedOrderCost)
+	{
+		try
+		{
+			PrintWriter filePW = new PrintWriter (new FileWriter(masterFileName, false));
+			filePW.printf("%n%d\t%s\t%f\t%d\t%f",borrowedItemID,borrowedItemName,borrowedItemPrice,borrowedQuantity,borrowedOrderCost);
+			fileFoundFlag = true;
+			recordCount++;
+			filePW.close();
+		}//END of try
+		catch (IOException ex)
+		{
+			fileFoundFlag = false;
+		}//END of catch (IOException ex)
+	}//END of setWriteOrder
+	
+	//Get File Found Flag
+	public boolean getFileFoundFlag()
+	{
+		return fileFoundFlag;
+	}//END of getFileFoundFlag
+	
+	//Get File Name
+	public String getFileName()
+	{
+		return masterFileName;
+	}//END of getFileName
+	
+	//Get Record Count
+	public int getRecordCount()
+	{
+		return recordCount;
+	}//END of getRecordCount
+}//END of Class
